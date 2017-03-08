@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+          <!-- Header da pagain Do Facebook da Tecno -->
+      <meta property="fb:pages" content="184470788281714">
+    
+    <link rel="dns-prefetch" href="http://www.gravatar.com/">
+    <link rel="dns-prefetch" href="http://platform.twitter.com/">
+    <link rel="dns-prefetch" href="http://img.youtube.com/">
+    <link rel="dns-prefetch" href="http://apis.google.com/">
+    <link rel="dns-prefetch" href="http://connect.facebook.net/">
+    <link rel="dns-prefetch" href="http://platform.linkedin.com/">
+    <link rel="dns-prefetch" href="http://ssl.gstatic.com/">
+    <link rel="dns-prefetch" href="http://static.ak.facebook.com/">
+    <link rel="dns-prefetch" href="http://s-static.ak.facebook.com/">
+    <link rel="dns-prefetch" href="http://www.google-analytics.com/">
+
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta name="description" content="Ciranda.me - Social Business">
+<meta name="keywords" content="ciranda, negocios, business">
+<meta name="robots" content="asd">
+<meta property="og:site_name" content="Ciranda.me - Social Business">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://tsdn.tecnospeed.com.br/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2">
+<meta property="og:title" content="Manipulando banco de dados Derby Embarcado">
+<meta property="og:description" content="O banco de dados embarcado surgiu para aplica&amp;ccedil;&amp;otilde;es pequenas nas quais precisamos utilizar um banco de dados mas n&amp;atilde;o queremos insta">
+<meta property="og:image" content="https://lh6.googleusercontent.com/JvSoQeAU3Xh2XJhIdnlUksD38LcoiL0peg0AkWPFTnCar7w35DIgDaGLIRp-7ljZnh9ssVBNpnMzSofkcWdTRxWXEUoStELvhq4B3AS1NdcFnvPhxQXYaOwPLnlNA0h-rpucMQM">
+<meta name="Description" content="O banco de dados embarcado surgiu para aplica&amp;ccedil;&amp;otilde;es pequenas nas quais precisamos utilizar um banco de dados mas n&amp;atilde;o queremos insta">    <title>Manipulando banco de dados Derby Embarcado - Blog do Desenvolvimento - TecnoSpeed - Ciranda.me - Social Business</title>    <link href="Squirrel_files/ciranda.ico" rel="icon" type="image/x-icon">
+    <link href="Squirrel_files/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/jquery-ui.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/slick.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/component.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/main.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/ciranda.ico" rel="icon" type="image/x-icon">  <style>.cke{visibility:hidden;}</style><script src="Squirrel_files/cbgapi.loaded_0" async=""></script><script async="" src="Squirrel_files/analytics.js"></script><script type="text/javascript" async="" src="Squirrel_files/ga.js"></script><script src="Squirrel_files/secureAnonymousFramework"></script><script type="text/javascript" charset="utf-8" async="" src="Squirrel_files/button.js"></script><style type="text/css">* html #li_ui_li_gen_1480944225664_0 a#li_ui_li_gen_1480944225664_0-link{height:1% !important;}#li_ui_li_gen_1480944225664_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1480944225664_0 span{-webkit-box-sizing:content-box !important;-moz-box-sizing:content-box !important;box-sizing:content-box !important;}#li_ui_li_gen_1480944225664_0 a#li_ui_li_gen_1480944225664_0-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1480944225664_0 a#li_ui_li_gen_1480944225664_0-link:link, #li_ui_li_gen_1480944225664_0 a#li_ui_li_gen_1480944225664_0-link:visited, #li_ui_li_gen_1480944225664_0 a#li_ui_li_gen_1480944225664_0-link:hover, #li_ui_li_gen_1480944225664_0 a#li_ui_li_gen_1480944225664_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1480944225664_0 a#li_ui_li_gen_1480944225664_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-logo{background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:0px -593px !important;background-repeat:no-repeat !important;background-color:#0077b5 !important;background-size:initial !important;cursor:pointer !important;border:0 !important;border-right:1px solid #066094 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:2px !important;-moz-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;}#li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title{color:#fff !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;text-shadow:0 -1px #005887 !important;line-height:20px !important;border-radius:2px !important;-moz-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;background-color:#0077b5 !important;background-image:-moz-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}#li_ui_li_gen_1480944225664_0.hovered #li_ui_li_gen_1480944225664_0-title{border:1px solid #000 !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-moz-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}#li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title, #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title{color:#fff !important;border:1px solid #000 !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-moz-linear-gradient(top, #066094 0%, #066094 100%) !important;}.IN-shadowed #li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title{}.IN-shadowed #li_ui_li_gen_1480944225664_0.hovered #li_ui_li_gen_1480944225664_0-title{}.IN-shadowed #li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title, .IN-shadowed #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title{}#li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title-text, #li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title-text *{color:#fff !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title-text em{font-style:italic !important;}#li_ui_li_gen_1480944225664_0.hovered #li_ui_li_gen_1480944225664_0-title-text, #li_ui_li_gen_1480944225664_0.hovered #li_ui_li_gen_1480944225664_0-title-text *{color:#fff !important;}#li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title-text, #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title-text, #li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title-text *, #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title-text *{color:#fff !important;}#li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title #li_ui_li_gen_1480944225664_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title{color:#fff !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;background-color:#0077b5 !important;background-image:-moz-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}.success #li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title-text, .success #li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1480944225664_0 #li_ui_li_gen_1480944225664_0-title{}.success #li_ui_li_gen_1480944225664_0.hovered #li_ui_li_gen_1480944225664_0-title{color:#fff !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-moz-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}.success #li_ui_li_gen_1480944225664_0.hovered #li_ui_li_gen_1480944225664_0-title-text, .success #li_ui_li_gen_1480944225664_0.hovered #li_ui_li_gen_1480944225664_0-title-text *{color:#fff !important;}.success #li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title, .success #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title{color:#fff !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-moz-linear-gradient(top, #066094 0%, #066094 100%) !important;}.success #li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title-text, .success #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title-text, .success #li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title-text *, .success #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1480944225664_0.clicked #li_ui_li_gen_1480944225664_0-title, .IN-shadowed .success #li_ui_li_gen_1480944225664_0.down #li_ui_li_gen_1480944225664_0-title{}#li_ui_li_gen_1480944225673_1-container.IN-right {display:inline-block !important;float:left !important;overflow:visible !important;position:relative !important;height:20px !important;padding-left:2px !important;line-height:1px !important;cursor:pointer !important;}#li_ui_li_gen_1480944225673_1.IN-right {display:block !important;float:left !important;height:20px !important;margin-right:4px !important;padding-right:4px !important;background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:right -447px !important;}#li_ui_li_gen_1480944225673_1-inner.IN-right {display:block !important;float:left !important;padding-left:8px !important;text-align:center !important;background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:0px -426px !important;}#li_ui_li_gen_1480944225673_1-content.IN-right {display:inline !important;font-size:11px !important;color:#4e4e4e !important;font-weight:bold !important;font-family:Arial, sans-serif !important;line-height:20px !important;padding:0 5px 0 5px !important;}#li_ui_li_gen_1480944225673_1-container.IN-empty {display:none !important;}#li_ui_li_gen_1480944225673_1-container.IN-hidden #li_ui_li_gen_1480944225673_1 {display:none !important;}</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head> 
+  <body itemscope="" itemtype="http://schema.org/WebPage">
+    <div id="modal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="ciranda-container">
+      <div id="alert-general" class="alert alert-content col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <p></p>
+      </div>
+            <div class="navbar navbar-default navbar-fixed-top navbar-inverse menu-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-top">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+                        <a class="navbar-brand" href="http://tsdn.tecnospeed.com.br/">
+              <img src="Squirrel_files/bfe370ac06a02e1dbf2da90fa9d5e129ea9ec836.png">
+            </a>
+                            <div id="sidebar-fixed" class="nav-toggle-top">
+                                <button class="nav-toggle"><span></span></button>
+              </div>
+            </div>
+
+            <div class="collapse navbar-collapse" id="menu-top">
+              <ul class="nav navbar-nav navbar-right">
+                                  <li class="form-login">
+                    <form class="form-vertical" enctype="application/x-www-form-urlencoded" method="post" action="/login?forwardurl=%2Fblog-do-desenvolvimento-tecnospeed%2Fpost%2Fmanipulando-banco-de-dados-derby-embarcado-2"><fieldset>
+<div class="control-group form-text-login "><div class="controls">
+<input name="login" id="login" placeholder="email ou usuário" class="form-control" type="text"></div></div>
+<div class="control-group form-password-senha "><div class="controls">
+<input name="senha" id="senha" value="" placeholder="senha" class="form-control" type="password"></div></div>
+<div class="form-actions">
+
+<input name="entrar" id="entrar" value="Entrar" class="btn btn-primary btn btn-info" type="submit"></div></fieldset></form>
+<a href="http://tsdn.tecnospeed.com.br/auth/forgot" class="forgot">
+<abbr title="Esqueceu sua senha? Clique aqui!">
+  <span class="glyphicon glyphicon-question-sign"></span>
+</abbr>
+</a>
+                  </li>
+                        
+              </ul>
+              <a id="link-new-ciranda" href="">
+                <img class="img-circle" src="Squirrel_files/ciranda.ico" data-toggle="tooltip" data-placement="bottom" title="Quer ter um site grátis, igual a esse?">
+              </a>
+            </div><!-- /.navbar-collapse -->
+          </div>
+        </div>
+
+        <div id="wrapper" class="toggled">
+          <nav id="sidebar-wrapper">
+            <div>
+              <div class="header">
+  <h2>Blog do Desenvolvimento - TecnoSpeed</h2>
+</div>
+  <div class="menu">
+    <div class="subtitulo">
+      <span>Login</span>
+    </div>
+     
+  <div id="div_login" class="login">
+    <div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 option">
+    
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 option">
+      <a href="https://www.facebook.com/dialog/oauth?client_id=439155316203828&amp;state=%2Fsocial%2F1%2Fcustom_domain%2F1&amp;redirect_uri=https%3A%2F%2Fciranda.me%2Fauth%2Foauth%2Ffacebook&amp;scope=email&amp;display=popup" title="Login com Facebook" class="btn btn-sm btn-login btn-login-facebook">
+                  <img src="Squirrel_files/facebook-branco.htm">
+                <span>Facebook</span>
+      </a>
+    </div>
+  
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 option">
+      <a href="https://accounts.google.com/o/oauth2/auth?client_id=774673127215.apps.googleusercontent.com&amp;state=%2Fsocial%2F1%2Fcustom_domain%2F1&amp;redirect_uri=https%3A%2F%2Fciranda.me%2Fauth%2Foauth%2Fgoogle&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo%23email&amp;response_type=code&amp;display=popup" title="Login com Google" class="btn btn-sm btn-login btn-login-google">
+                  <img src="Squirrel_files/google-branco.png">
+                <span>Google</span>
+      </a>
+    </div>
+  
+  </div>
+</div>
+<span class="ou col-sm-12"> ----- ou ----- </span>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 option">
+  <form class="form-vertical" enctype="application/x-www-form-urlencoded" method="post" action="/login?forwardurl=%2Fblog-do-desenvolvimento-tecnospeed%2Fpost%2Fmanipulando-banco-de-dados-derby-embarcado-2"><fieldset>
+<div class="control-group form-text-login "><div class="controls">
+<input name="login" id="login" placeholder="email ou usuário" class="form-control" type="text"></div></div>
+<div class="control-group form-password-senha "><div class="controls">
+<input name="senha" id="senha" value="" placeholder="senha" class="form-control" type="password"></div></div>
+<div class="form-actions">
+
+<input name="entrar" id="entrar" value="Entrar" class="btn btn-primary btn btn-info" type="submit"></div></fieldset></form></div>
+
+<div id="login-options" class="row">
+    </div>
+  </div>
+  </div>
+
+  <div class="menu">
+    <ul class="nav nav-stacked">
+      <li class="menu-header">
+        <span class="glyphicon glyphicon-align-justify"></span>
+        <span>
+          Menu
+        </span>
+      </li>
+      <li>
+        <a href="http://tsdn.tecnospeed.com.br/">Início</a>
+      </li>
+      <li>
+        <a href="http://tsdn.tecnospeed.com.br/blogs">Blogs</a>
+      </li>
+      <li>
+        <a href="http://tsdn.tecnospeed.com.br/groups">Grupos</a>
+      </li>
+        </ul>
+</div>
+              <div id="more-sidebar">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+              </div>          
+            </div>
+          </nav>
+
+          <div id="page-content-wrapper">
+            <div id="container-top" class="container-fluid">
+                              <div id="container-cover-fluid" class="">
+            <img class="cover-image" src="Squirrel_files/426_ef322f8808f89a3ac4a4dc613a485d818da1e6bd.jpg" alt="https://s3.amazonaws.com/ciranda/entities/1/covers/426_ef322f8808f89a3ac4a4dc613a485d818da1e6bd.jpg">
+        <div class="ciranda-loading" style="display: none"></div>
+    <div id="gradient-cover">
+      <div id="container-cover" class="container">
+        <div class="row">
+          <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-9 col-xs-offset-3 table-col">
+                        <h2>
+              Blog do Desenvolvimento - TecnoSpeed 
+              <span></span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+<div id="container-header-fluid">
+  <div id="container-header" class="table-container">
+    <div class="row table-row">
+      <div id="image-header" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 table-col">
+        <a class="thumbnail" href="http://tsdn.tecnospeed.com.br/blog/blog-do-desenvolvimento-tecnospeed">
+                    <img src="Squirrel_files/51b8d2a1b1f8ae620452f50a-300-308x308-0x0.png">
+        </a>
+      </div>
+      <div id="title-header" class="col-lg-9 col-md-9 col-sm-9 col-xs-9 table-col">
+        <div class="row">
+          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+            <div class="bread-crumb"><a href="http://tsdn.tecnospeed.com.br/">TSDN</a> &gt;&gt; <a href="http://tsdn.tecnospeed.com.br/blog/blog-do-desenvolvimento-tecnospeed">Blog do Desenvolvimento - TecnoSpeed</a> &gt;&gt; <span>Manipulando banco de dados Derby Embarcado</span></div>                        <div class="description">
+                          </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div id="options-header" class="pull-right">
+                                            <a class="btn btn-success" href="http://tsdn.tecnospeed.com.br/register/blog/426/route/aHR0cDovL3RzZG4udGVjbm9zcGVlZC5jb20uYnIvYmxvZy9ibG9nLWRvLWRlc2Vudm9sdmltZW50by10ZWNub3NwZWVk" title="Participar" style="margin-bottom: 5px;">
+                    <span class="glyphicon glyphicon-log-in"></span> Participar
+                  </a>              
+                                          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>                     
+            </div>
+
+            <div id="ciranda-content-fluid" class="container-fluid">
+              <div id="ciranda-content">
+                <div class="row">
+  <div id="container-activity-28962" class="container-activity 
+       col-lg-10 col-md-10 col-sm-10 col-xs-12">
+    <div id="post_28962" class="content-activity post">
+      <input id="activity_id" value="28962" type="hidden">
+      <input id="access_id" value="4742979" type="hidden">
+      <input id="profile_sharer" value="" type="hidden">
+      <div id="container-notifications-activity-28962"></div>
+        
+                  <div class="row">
+        <h1 class="activity-title col-lg-11 col-md-11 col-sm-11 col-xs-11">
+          Manipulando banco de dados Derby Embarcado        </h1>
+        <div class="controls col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                  </div>
+      </div>
+
+      <div class="row">
+        <div class="post-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="user-info">
+      <div class="user-name">
+        por 
+        <a href="https://ciranda.me/user/">
+          <img class="img-circle" src="Squirrel_files/22_7db4eee5aff77da94622b42dbaafdfbc941d4d1d.jpg" style="width: 30px">
+          Leonardo Galdioli Dias        </a>
+        <span>no blog</span> <a href="http://tsdn.tecnospeed.com.br/blog/blog-do-desenvolvimento-tecnospeed" class="blog-link"> Blog do Desenvolvimento - TecnoSpeed</a>        <div class="date pull-right">
+          Ter - 28/04/2015, 13:57 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          </div>
+          </div>
+          <div class="post-text-in">
+              <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> O banco de dados embarcado surgiu para aplicações pequenas nas quais precisamos utilizar um banco de dados mas não queremos instalar um SGBD junto com o produto para executá-lo. </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Um banco muito conhecido e eficiente é o Apache Derby, desenvolvido completamente em Java. Por isso é uma excelente opção para aplicações portáveis criadas tambem em Java, como o produto da Tecnospeed  </span>  <span style="font-size: 15px; font-family: Arial; font-weight: bold; vertical-align: baseline; white-space: pre-wrap;"> Manager Neverstop </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> . </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Portanto para este tutorial utilizamos o banco de dados do Manager Neverstop para dar os exemplos de manipulação do banco de dados Derby Embarcado. </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Primeiramente para manipular o banco de dados utilizaremos um SQL Client chamado  </span>  <span style="font-size: 15px; font-family: Arial; font-weight: bold; vertical-align: baseline; white-space: pre-wrap;"> Squirrel </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> . O download pode ser encontrado  </span>  <a href="http://www.squirrelsql.org/#installation" style="text-decoration:none;">  <span style="font-size: 15px; font-family: Arial; color: rgb(17, 85, 204); text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;"> aqui </span>  </a>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> . </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> O Squirrel, também é um produto desenvolvido inteiramente em java e suporta além do Derby, vários outros bancos de dados, por isso é altamente recomendado. </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Após instalar o Squirrel, siga os passos abaixo: </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Para abrir o Squirrel, entre na pasta raiz de instalação e execute o .bat  </span>  <span style="font-size: 15px; font-family: Arial; font-weight: bold; vertical-align: baseline; white-space: pre-wrap;"> squirrel-sql.bat. </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Agora precisamos configurar o Driver do banco de dados Derby Embarcado. Para isso clique em  </span>  <span style="font-size: 15px; font-family: Arial; font-style: italic; vertical-align: baseline; white-space: pre-wrap;"> Drivers  </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> no menu lateral esquerdo, clique com o botão direito em  </span>  <span style="font-size: 15px; font-family: Arial; font-style: italic; vertical-align: baseline; white-space: pre-wrap;"> Apache Derby Embedded </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  e em seguidar clique em  </span>  <span style="font-size: 15px; font-family: Arial; font-style: italic; vertical-align: baseline; white-space: pre-wrap;"> Modify Driver </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> . </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/JvSoQeAU3Xh2XJhIdnlUksD38LcoiL0peg0AkWPFTnCar7w35DIgDaGLIRp-.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="337px;" width="601px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Seleciona a aba  </span>  <span style="font-size: 15px; font-family: Arial; font-style: italic; vertical-align: baseline; white-space: pre-wrap;"> Extra Class Path </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  e clique em  </span>  <span style="font-size: 15px; font-family: Arial; font-style: italic; vertical-align: baseline; white-space: pre-wrap;"> Add  </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> para adicionarmos o driver do Derby que está em anexo neste post. </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/TeBWsZ0v0rA3d01OiVl083C61Z_HBo8S05zfnLfs25IA44cn-Px4a396Htbi.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="543px;" width="602px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Selecione o arquivo e clique em  </span>  <span style="font-size: 15px; font-family: Arial; font-style: italic; vertical-align: baseline; white-space: pre-wrap;"> OK </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> . </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Após este passo é possível perceber que o nosso driver está com o ícone de ok. </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/o69jjr2SJKlEdgdVEYpguNoh0VhPvzr4eO2J6_graUvBvpVkaKmkhN7ZtMf6.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="251px;" width="242px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Agora vamos configurar a conexão com o banco de dados. </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Para conectar-se ao banco basta clica no ícone de “+” no canto superior esquerdo. </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/qQfhwr-HUXSWqzHEaFa-3fj4NRY7OKPKCpqC8oo3cw2HsGKHH2mBBO7A8b9Z.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="172px;" width="602px;">  </span>  </span>  </p> 
+
+ <p>  <br> 
+ <br> 
+&nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Preencha o name para identificar o banco de dados e selecione o driver do Derby como mostra a imagem abaixo. </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/jKXipDJYyps_dBoUH-6Xo63JCxwjWSWJZHyy4lvVlgYbOLZPaGm6Y6PJGSjL.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="443px;" width="544px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> No campos URL deve-se informar o caminho para o banco de dados. Quando é um banco de dados embarcado nós temos que configurar o diretório em que se encontra o banco de dados. No exemplo abaixo iremos utilizar o diretório padrão de instalação do banco de dados do Manager Neverstop. A URL deverá ficar da seguinte forma: </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 12px; font-family: Arial; font-style: italic; vertical-align: baseline; white-space: pre-wrap;"> jdbc:derby:C:\Arquivos de programas\ManagerNeverStop\resources\database\NeverStopDB </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Após isso precisamos preencher o User Name e o Password, que no caso do Manager Neverstop por padrão são admin/admin. </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Após estas configurações a tela deve ficar desta forma. </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/TBi1kNFbn4uOhIoQpx0afrpHdM-8LIOPCLnBzlcLF1h9rlsWR1NfOIW2Ot-O.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="410px;" width="506px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Após isso clique em Test e em seguida em Connect e deverá aparecer uma mensagem dizendo que a conexão foi realizada com sucesso. </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/m7iBlgnDtpwOSqUdOqWertVLEjUqEQz6S3-yq7e5FyxxE2a4isI2zR5V2Uj5.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="420px;" width="527px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Pronto, agora podemos clicar em OK e em seguida conectar no banco de dados do Manager Neverstop. </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/EvuxCHD9-iShK9dQARZYVSh4rEc7SWQ1abJaMJtCfhe2wHMNON85kwx7aiZW.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="263px;" width="602px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> IMPORTANTE: Como o Derby é um banco de dados embarcado, ele só permite uma conexão por vez, portanto sempre que for tentar se conectar em um banco embarcado, tenha certeza que nenhuma outra aplicação esteja conectada neste banco. </span>  </span>  </p> 
+
+ <p>  <br> 
+&nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Seguem agora algumas dicas para utilização do Squirrel. </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Para executar comandos SQL basta clicar na aba SQL e aplicar os comandos </span>  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/1JKX8fj9l2ja8kMi64q5Bo6pUQ0GxgqzzcVslr2cgbHM2qxQnVQt_sE9leJ-.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="441px;" width="602px;">  </span>  </span>  </p> 
+
+ <p> &nbsp; </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> Para navegar sobre as tabelas e esquemas basta acessar pela treeview do menu lateral esquerdo como mostra a imagem abaixo </span>  </span>  </p> 
+
+ <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">  <span id="docs-internal-guid-77e14d45-00f6-39e1-47e7-edfebccaeb77">  <span style="font-size: 15px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;">  <img src="Squirrel_files/1f5nxtmqbue7SOpdlOKKIX1P9yhCOXe_aY0nsBmMhVW_naInWoMs0bg2vI6T.png" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" height="687px;" width="602px;">  </span>  </span>  </p> 
+
+ <div> &nbsp; </div> 
+            <p class="file-download">Arquivos para download</p><div class="archive-download">
+            <a href="http://tsdn.tecnospeed.com.br/files/render/a/AKpTncMjzwY/m/2Aal0HUq8WedzXm0RXomutOTf3bySj1HBuEyCQQiqPPF6jOdfRecxQ4TlFfSgmyqsWS5qjtJT7s" class="file-activity" target="_blank">
+              <p class="title">
+                <img src="Squirrel_files/media-anexo.png" alt="derby-10.10.1.1.jar">
+                derby-10.10.1.1.jar
+              </p>
+            </a></div>          </div>
+                                <div class="container-hashtags">
+      <a href="http://tsdn.tecnospeed.com.br/search/%23db" class="hashtag-description">#db</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23derby" class="hashtag-description">#derby</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23banco" class="hashtag-description">#banco</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23dados" class="hashtag-description">#dados</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23neverstop" class="hashtag-description">#neverstop</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23squirrel" class="hashtag-description">#squirrel</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23sql" class="hashtag-description">#sql</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23java" class="hashtag-description">#java</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23embarcado" class="hashtag-description">#embarcado</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23embedded" class="hashtag-description">#embedded</a>
+      <a href="http://tsdn.tecnospeed.com.br/search/%23aspiraway" class="hashtag-description">#aspiraway</a>
+  </div>                  </div>
+                                              <div id="container-social-networks-post" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <span class="title">Compartilhe: </span>
+              <ul id="social-networks-post">
+                
+      <li class="share-facebook">
+        <a href="javascript:%20void(0);" onclick="newShare(28962); window.open('http://www.facebook.com/sharer.php?s=100&amp;p[url]=http%3A%2F%2Ftsdn.tecnospeed.com.br%2Ftsdn%2Fblog-do-desenvolvimento-tecnospeed%2Fpost%2Fmanipulando-banco-de-dados-derby-embarcado-2&amp;p[title]=Manipulando+banco+de+dados+Derby+Embarcado&amp;p[summary]=O+banco+de+dados+embarcado+surgiu+para+aplica%26ccedil%3B%26otilde%3Bes+pequenas+nas+quais+precisamos+utilizar+um+banco+de+dados+mas+n%26atilde%3Bo+queremos+instalar+um+SGBD+junto+com+o+produto+para+execut%26aacute%3B-lo.%0D%0A%0D%0AUm+banco+mu&amp;p[message]=O+banco+de+dados+embarcado+surgiu+para+aplica%26ccedil%3B%26otilde%3Bes+pequenas+nas+quais+precisamos+utilizar+um+banco+de+dados+mas+n%26atilde%3Bo+queremos+instalar+um+SGBD+junto+com+o+produto+para+execut%26aacute%3B-lo.%0D%0A%0D%0AUm+banco+mu&amp;p[images][0]=https://lh6.googleusercontent.com/JvSoQeAU3Xh2XJhIdnlUksD38LcoiL0peg0AkWPFTnCar7w35DIgDaGLIRp-7ljZnh9ssVBNpnMzSofkcWdTRxWXEUoStELvhq4B3AS1NdcFnvPhxQXYaOwPLnlNA0h-rpucMQM&amp;p[images][1]=https://lh4.googleusercontent.com/TeBWsZ0v0rA3d01OiVl083C61Z_HBo8S05zfnLfs25IA44cn-Px4a396Htbivb9GbrfOBQxHOWOWuZpJUEvuLkYAcrEBdNWoIBaagJMrtkvesHcznwY2bDf_wKvogI2eVtACD3A&amp;p[images][2]=https://lh3.googleusercontent.com/o69jjr2SJKlEdgdVEYpguNoh0VhPvzr4eO2J6_graUvBvpVkaKmkhN7ZtMf6OppSWFllY_57y4Kahj9AcYZsDK7_UkARUwyeds2G2kxoImRTQz3CHBdnuZaM33oyAVxbOPOkEiQ&amp;p[images][3]=https://lh3.googleusercontent.com/qQfhwr-HUXSWqzHEaFa-3fj4NRY7OKPKCpqC8oo3cw2HsGKHH2mBBO7A8b9ZRL5_gBXLHbDEli_4UG4mgYil1BZsgNowYceMShYO8r_C1uJQGO-qIzVQ4Nrs8635GcHV6QrLNHI&amp;p[images][4]=https://lh6.googleusercontent.com/jKXipDJYyps_dBoUH-6Xo63JCxwjWSWJZHyy4lvVlgYbOLZPaGm6Y6PJGSjL3-B2MSFJNKjB7C5chijgUP9chHAO6uvwTZONG7bEJLX1yPW8qOe7bz1NEDu6f17hRDbosMVcj_4&amp;p[images][5]=https://lh4.googleusercontent.com/TBi1kNFbn4uOhIoQpx0afrpHdM-8LIOPCLnBzlcLF1h9rlsWR1NfOIW2Ot-OW17zY1lyvyvcVxweVWzn1UHeYj-4TkMyZjJHhUPX2M2L43MV5BUVgqDKbbX-Flq9nuB73EdARwI&amp;p[images][6]=https://lh3.googleusercontent.com/m7iBlgnDtpwOSqUdOqWertVLEjUqEQz6S3-yq7e5FyxxE2a4isI2zR5V2Uj53SycNqywb_0byKIVSESjxp4WAOuHH0TmWQWzP9ki52HxL_39mxPLZOVVJbWjLdvcnxINeCirtuE&amp;p[images][7]=https://lh4.googleusercontent.com/EvuxCHD9-iShK9dQARZYVSh4rEc7SWQ1abJaMJtCfhe2wHMNON85kwx7aiZWNUKbjOF4O3MMQpwa74jpXSjvclpvtFa8_Q53kdneUEdAv_R8MvpDETBO6e1jt-1I8K2YIlRKRYU&amp;p[images][8]=https://lh3.googleusercontent.com/1JKX8fj9l2ja8kMi64q5Bo6pUQ0GxgqzzcVslr2cgbHM2qxQnVQt_sE9leJ-MIMNUyQ_Ic2LiakQr6EOgbwBfHGK8oiw17LmTrvgDN_PWsihhRtDdl0lBND-JrU7slRdnBit0Qc&amp;p[images][9]=https://lh5.googleusercontent.com/1f5nxtmqbue7SOpdlOKKIX1P9yhCOXe_aY0nsBmMhVW_naInWoMs0bg2vI6T-MLkP93t23vV8tkEodarwrqrFGZSP4SVUKXzdxvRd1NsAzVOrmR889o3SvgExlTEC_f6iKaNZjc', 'share-facebook', 'toolbar=0, status=0, width=650, height=450');">
+          <i></i><span>Compartilhar</span>
+        </a>
+      </li>      
+      <li class="like-facebook"><div class="socialite facebook-like socialite-instance socialite-loaded" data-href="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" data-default-href="http://www.facebook.com/sharer.php?u=http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-socialite="0"><div class="fb-like fb_iframe_widget" data-href="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" data-default-href="http://www.facebook.com/sharer.php?u=http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-socialite="0" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;href=http%3A%2F%2Ftsdn.tecnospeed.com.br%2Ftsdn%2Fblog-do-desenvolvimento-tecnospeed%2Fpost%2Fmanipulando-banco-de-dados-derby-embarcado-2&amp;layout=button_count&amp;locale=pt_BR&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=60"><span style="vertical-align: bottom; width: 88px; height: 20px;"><iframe name="f3bd971caa85a78" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" style="border: medium none; visibility: visible; width: 88px; height: 20px;" src="Squirrel_files/like.htm" class="" height="1000px" frameborder="0" width="60px"></iframe></span></div></div></li>
+      <li class="share-twitter"><div class="socialite twitter-share socialite-instance socialite-loaded" data-url="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-count="horizontal" data-default-href="http://twitter.com/share" data-socialite="1"><iframe id="twitter-widget-0" scrolling="no" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: absolute; visibility: hidden; width: 0px; height: 0px;" title="Twitter Tweet Button" src="Squirrel_files/tweet_button.htm" data-url="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" frameborder="0"></iframe></div></li>
+      <li class="share-google"><div class="socialite googleplus-one socialite-instance socialite-loaded" data-size="medium" data-href="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-default-href="https://plus.google.com/share?url=http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-socialite="2"><div class="g-plusone" data-size="medium" data-href="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-default-href="https://plus.google.com/share?url=http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-socialite="2" id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" id="I0_1480944225889" name="I0_1480944225889" src="Squirrel_files/fastbutton.htm" data-gapiattached="true" title="+1" frameborder="0" width="100%"></iframe></div></div></li>
+      <li class="share-linkedin"><div class="socialite linkedin-share socialite-instance socialite-loaded" data-url="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-counter="right" data-default-href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-socialite="3"><span style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;" class="IN-widget"><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1480944225664_0"><a id="li_ui_li_gen_1480944225664_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1480944225664_0-logo">in</span><span id="li_ui_li_gen_1480944225664_0-title"><span id="li_ui_li_gen_1480944225664_0-mark"></span><span id="li_ui_li_gen_1480944225664_0-title-text">Share</span></span></a></span></span><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1480944225673_1-container" class="IN-right IN-hidden"><span id="li_ui_li_gen_1480944225673_1" class="IN-right"><span id="li_ui_li_gen_1480944225673_1-inner" class="IN-right"><span id="li_ui_li_gen_1480944225673_1-content" class="IN-right">0</span></span></span></span></span></span><script type="IN/Share+init" data-url="http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-counter="right" data-default-href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://tsdn.tecnospeed.com.br/tsdn/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" data-socialite="3"></script></div></li>
+                  </ul>
+            </div>
+                        </div>
+      <hr>
+      <div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          </div>
+</div>      <hr>
+      <div class="row">
+        <div id="releated-posts-28962" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h3 class="activity-related-title">Conteúdo Relacionado:</h3>
+  <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+        <div class="activity-related ">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <center>
+                <a class="thumbnail link-image" href="http://tsdn.tecnospeed.com.br/base-de-conhecimento/post/nova-tabela-de-ncm-2016-tabela-oficial-do-mdic">
+                  <img src="Squirrel_files/media-xls.png">
+                </a>
+              </center>
+            </div>
+            <a href="http://tsdn.tecnospeed.com.br/base-de-conhecimento/post/nova-tabela-de-ncm-2016-tabela-oficial-do-mdic">
+              <h4 class="activity-title col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                [Download] Tabela de NCM 2016 - Oficial do Mdic              </h4>
+            </a>
+          </div>
+        </div>
+      </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+        <div class="activity-related ">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <center>
+                <a class="thumbnail link-image" href="http://tsdn.tecnospeed.com.br/novidades-dos-produtos/post/componente-mdfe-versao-5-7-27-52192">
+                  <img src="Squirrel_files/2Aal0HUq8WeL5dGDWnRuPaFwQMsGjvdPjmtLoYb3cKc4nR7evjsCiPmppo7F.jpg">
+                </a>
+              </center>
+            </div>
+            <a href="http://tsdn.tecnospeed.com.br/novidades-dos-produtos/post/componente-mdfe-versao-5-7-27-52192">
+              <h4 class="activity-title col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                Componente MDFe - Versão 5.7.27.52192              </h4>
+            </a>
+          </div>
+        </div>
+      </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+        <div class="activity-related ">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <center>
+                <a class="thumbnail link-image" href="http://tsdn.tecnospeed.com.br/base-de-conhecimento/post/documentacao-tecnica-holambra-sp">
+                  <img src="Squirrel_files/2Aal0HUq8Wd5a4sEmsXvvwRZuABppyl2btnnIkf3y14MnKFKXFQIRDc_pIca.png">
+                </a>
+              </center>
+            </div>
+            <a href="http://tsdn.tecnospeed.com.br/base-de-conhecimento/post/documentacao-tecnica-holambra-sp">
+              <h4 class="activity-title col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                Documentação Técnica: Holambra - SP              </h4>
+            </a>
+          </div>
+        </div>
+      </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+        <div class="activity-related ">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <center>
+                <a class="thumbnail link-image" href="http://tsdn.tecnospeed.com.br/blog-da-tecnospeed/post/vem-ai-a-4-geracao-da-nf-e">
+                  <img src="Squirrel_files/2Aal0HUq8We692VG8MatBEYo9fDFv4HwoG9mzI3pgP40z26tlfF7WI44HQUl.jpg">
+                </a>
+              </center>
+            </div>
+            <a href="http://tsdn.tecnospeed.com.br/blog-da-tecnospeed/post/vem-ai-a-4-geracao-da-nf-e">
+              <h4 class="activity-title col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                Vem aí a 4° geração da NF-e!              </h4>
+            </a>
+          </div>
+        </div>
+      </div>
+      </div>
+        </div>  
+      </div>    
+    </div>
+    <div class="container-comments">
+      <div class="title-comments">
+        Comentários
+        <span class="glyphicon glyphicon-comment"></span>
+      </div>
+        
+        <div class="comment-as-guest alert boxsizingBorder">
+  <p>
+    <strong>Deixe seu comentário</strong>
+  </p><br>
+  <div id="messagesCommentGuest" class="alert alert-error fade in boxsizingBorder" style="display: none"></div>
+
+  <form method="post" action="/activity/commentguest" id="form_comment_guest" class="form-horizontal" role="form" onsubmit="commentguest(this, '28962'); return false;">
+
+    <div class="form-group">
+      <label for="commentguest_name" class="col-sm-2 control-label">Nome</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="profile_name" id="commentguest_name" placeholder="Informe seu nome" type="text">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="commentguest_email" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="profile_email" id="commentguest_email" placeholder="Informe seu email para receber notificações de resposta" type="email">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">ou</label>
+      <div class="col-sm-10">
+          <a href="https://www.facebook.com/dialog/oauth?client_id=439155316203828&amp;state=%2Fsocial%2F1%2Froute%2FaHR0cDovL3RzZG4udGVjbm9zcGVlZC5jb20uYnIvYmxvZy1kby1kZXNlbnZvbHZpbWVudG8tdGVjbm9zcGVlZC9wb3N0L21hbmlwdWxhbmRvLWJhbmNvLWRlLWRhZG9zLWRlcmJ5LWVtYmFyY2Fkby0y%2Fcustom_domain%2F1&amp;redirect_uri=https%3A%2F%2Fciranda.me%2Fauth%2Foauth%2Ffacebook&amp;scope=email&amp;display=popup" title="Login com Facebook" class="external-login">
+          <img src="Squirrel_files/facebook-branco.htm">
+          <span>Entre com Facebook</span>
+        </a>
+        <a href="https://accounts.google.com/o/oauth2/auth?client_id=774673127215.apps.googleusercontent.com&amp;state=%2Fsocial%2F1%2Froute%2FaHR0cDovL3RzZG4udGVjbm9zcGVlZC5jb20uYnIvYmxvZy1kby1kZXNlbnZvbHZpbWVudG8tdGVjbm9zcGVlZC9wb3N0L21hbmlwdWxhbmRvLWJhbmNvLWRlLWRhZG9zLWRlcmJ5LWVtYmFyY2Fkby0y%2Fcustom_domain%2F1&amp;redirect_uri=https%3A%2F%2Fciranda.me%2Fauth%2Foauth%2Fgoogle&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo%23email&amp;response_type=code&amp;display=popup" title="Login com Google" class="external-login">
+          <img src="Squirrel_files/google-branco.png">
+          <span>Entre com Google</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="commentguest_value" class="col-sm-2 control-label">Comentário</label>
+      <div class="col-sm-10">
+        <textarea id="commentguest_value" class="form-control" placeholder="Insira seu comentário" name="value" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="commentguest_codigo" class="col-sm-2 control-label">Código de Segurança:</label>
+      <div class="col-sm-10 commentguest_captcha">
+        <div id="captcha_comment">
+        <pre>  _  __     ___      _____     ______    ____       ___    
+ | |/ //   / _ \\   / ____||  /_   _//  |  _ \\    / _ \\  
+ | ' //   | / \ || / //---`'   -| ||-   | |_| ||  | / \ || 
+ | . \\   | \_/ || \ \\___     _| ||_   | .  //   | \_/ || 
+ |_|\_\\   \___//   \_____||  /_____//  |_|\_\\    \___//  
+ `-` --`   `---`     `----`   `-----`   `-` --`    `---`   
+                                                           
+</pre>
+          </div>
+        <input id="field_captcha_comment" class="form-control" name="captcha" placeholder="Informe o código de verificação" type="text">    
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Enviar</button>
+      </div>
+    </div>
+
+    <input value="383edf5f454bd277f642cafdbea48f1b" id="id_field_captcha" name="id_field_captcha" type="hidden">    
+    <input value="28962" name="activity_id" type="hidden">    
+    <input value="426" name="blog_id" type="hidden">
+    <input value="http://tsdn.tecnospeed.com.br/blog-do-desenvolvimento-tecnospeed/post/manipulando-banco-de-dados-derby-embarcado-2" name="activity_uri" type="hidden">
+  </form>
+
+</div>          
+      <div class="comments row">
+              </div>
+    </div>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+          <div class="container-ad-in-post content-white padding-default">
+      <a href="http://tsdn.tecnospeed.com.br/service/curso-bloco-k-para-programadores-rascunho/activity_referer/28962" title="Curso Bloco K para Programadores">
+        <center>
+          <img class="img-thumbnail" src="Squirrel_files/e70a88c8db7ca2903570fefca2b6432fb217016f-0x8-260x260.png">
+        </center>
+                <p class="text-ads-description">Aprenda a implementar o Bloco K em seu Sistema</p>
+      </a>
+    </div>
+          <div class="container-ad-in-post content-white padding-default">
+      <a href="https://ciranda.me/velociti/product/ciranda-social-business/activity_referer/28962" title="Ciranda - Social Business">
+        <center>
+          <img class="img-thumbnail" src="Squirrel_files/a69852054073ca0b1bf6134b8582d5071b2a6d76-0x0-300x300.png">
+        </center>
+                <p class="text-ads-description">Tenha uma rede social corporativa da sua empresa!</p>
+      </a>
+    </div>
+          <div class="container-ad-in-post content-white padding-default">
+      <a href="http://tsdn.tecnospeed.com.br/product/componente-gnre-rascunho/activity_referer/28962" title="Componente GNRE">
+        <center>
+          <img class="img-thumbnail" src="Squirrel_files/206b305cc589b3561544f4ab13856ffc9808bd2d-28x5-295x295.png">
+        </center>
+                <p class="text-ads-description">Componente GNRE da Tecnospeed que permite fazer a comunicação entre os WebSer…</p>
+      </a>
+    </div>
+  </div>   
+</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <audio id="sound-notification" src="Squirrel_files/success.wav" controls="controls" preload="auto" autobuffer="" style="display: none"></audio>
+      <script type="text/javascript" async="" src="Squirrel_files/plusone.js" gapi_processed="true"></script><script id="facebook-jssdk" src="Squirrel_files/all.js"></script><script id="twitter-wjs" src="Squirrel_files/widgets.js"></script><script>
+        var portal = {
+          entity_id: "1",
+          entity_slug: "tsdn",
+          media_server: "https://s3.amazonaws.com/ciranda",
+          notificationEngine_uri: "https://notification.ciranda.me"
+        };
+        var profileSocket = {id: 'guest'};
+        var user = 0      </script>
+      <script type="text/javascript" src="Squirrel_files/jquery-1.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_008.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery-ui.js"></script>
+<script type="text/javascript" src="Squirrel_files/bootstrap.js"></script>
+<script type="text/javascript" src="Squirrel_files/classie.js"></script>
+<script type="text/javascript" src="Squirrel_files/sidebarEffects.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_003.js"></script>
+<script type="text/javascript" src="Squirrel_files/underscore-min.js"></script>
+<script type="text/javascript" src="Squirrel_files/socialite.js"></script>
+<script type="text/javascript" src="Squirrel_files/slick.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_002.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/highcharts.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_004.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_012.js"></script>
+<script type="text/javascript" src="Squirrel_files/ckeditor.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/jquery_009.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/xregexp-min.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/unicode-base.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_007.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/jquery_013.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/jquery.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_005.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_011.js"></script>
+<script type="text/javascript" src="Squirrel_files/ekko-lightbox.js"></script>
+<script type="text/javascript" src="Squirrel_files/tinycon.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/jquery_006.js"></script>
+<script type="text/javascript" src="Squirrel_files/jquery_010.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/ZeroClipboard.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/vimeo-upload.js"></script>
+<script type="text/javascript" src="Squirrel_files/select2.js"></script>
+<script type="text/javascript" src="Squirrel_files/highlight.js"></script>
+<script type="text/javascript" src="Squirrel_files/socket.js"></script>
+<script type="text/javascript" src="Squirrel_files/socket_002.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/desktop-notify-min.js"></script>
+<script type="text/javascript" src="Squirrel_files/general.js"></script>
+<script type="text/javascript" src="Squirrel_files/messages.js"></script>
+<script type="text/javascript" src="Squirrel_files/main.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/campaign.js"></script>
+<script type="text/javascript" async="1" src="Squirrel_files/vimeo.js"></script>
+<script type="text/javascript">
+     </script>
+<script type="text/javascript">
+    //<![CDATA[
+    !function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+              }
+            }(document, "script", "twitter-wjs");    //]]>
+</script>
+<script type="text/javascript">
+    (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id))
+                return;
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+    //<![CDATA[
+    window.___gcfg = {lang: 'pt-BR'};
+            (function() {
+              var po = document.createElement('script');
+              po.type = 'text/javascript';
+              po.async = true;
+              po.src = 'https://apis.google.com/js/plusone.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(po, s);
+            })();    //]]>
+</script>
+<script type="text/javascript" src="Squirrel_files/in.js"></script>
+                    <script type="text/javascript">
+          var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-8225766-35']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54505819-1', 'auto');
+  ga('send', 'pageview');
+        </script>
+            <script type="text/javascript">
+        $(document).ready(function() {
+          $('.read_more_post').on('click', function() {
+            var title = $(this).attr("data-title");
+            ga('send', 'event', 'Continue Lendo', 'click', title);
+            console.log("Registrou o evento");
+          });
+        });
+      </script>   
+
+              <!-- Header Do RDStation cdn -->
+        <script type="text/javascript" async="" src="Squirrel_files/5035386b-3240-48f5-8844-e77fa0287fcf-loader.js"></script>
+           
+  
+
+<link href="Squirrel_files/tomorrow-night.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/ekko-lightbox.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/dark.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/jquery.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/imgareaselect-default.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/select2.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Squirrel_files/jquery_002.css" media="screen" rel="stylesheet" type="text/css"><iframe style="width: 1px; height: 1px; position: absolute; top: -100px;" id="rd_tmgr"></iframe><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border: medium none;" src="http://staticxx.facebook.com/connect/xd_arbiter/r/fTmIQU3LxvB.js?version=42#channel=f16ec8e3ce5f8b&amp;origin=http%3A%2F%2Ftsdn.tecnospeed.com.br" frameborder="0"></iframe><iframe name="fb_xdm_frame_https" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border: medium none;" src="Squirrel_files/fTmIQU3LxvB_002.htm" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div><script src="Squirrel_files/all_002.js" id="facebook-jssdk" async=""></script><script src="Squirrel_files/widgets.htm" id="twitter-wjs" charset="utf-8" async=""></script><script src="Squirrel_files/plusone_002.js" async="" gapi_processed="true"></script><script src="Squirrel_files/in.js" async=""></script><script type="text/javascript" src="Squirrel_files/traffic-source-cookie.js"></script><script type="text/javascript" src="Squirrel_files/lead-tracking.js"></script><script type="text/javascript" src="Squirrel_files/rdstation-popup.js"></script><iframe id="rufous-sandbox" scrolling="no" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: medium none;" title="Twitter analytics iframe" frameborder="0"></iframe></body></html>
